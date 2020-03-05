@@ -13,7 +13,7 @@ uint8_t pmem[PMEM_SIZE];
 
 uint32_t paddr_read(paddr_t addr, int len) {
   return pmem_rw(addr, uint32_t) & (~0u >> ((4 - len) << 3));
-}
+}//len取1 2 3 4, pmem_rw(addr, uint32_t)的最后8 16 24 32位
 
 void paddr_write(paddr_t addr, int len, uint32_t data) {
   memcpy(guest_to_host(addr), &data, len);
