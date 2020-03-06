@@ -277,34 +277,10 @@ uint32_t expr(char *e, bool *success)
     {
       if (tokens[i].type == '-')
       {
-        switch (tokens[i - 1].type)
+        if (tokens[i - 1].type == '+' || tokens[i - 1].type == '-' || tokens[i - 1].type == '*' || tokens[i - 1].type == '/' || tokens[i - 1].type == '(' || tokens[i - 1].type == TK_NEG)
         {
-        case '+':
-          tokens[i].type = TK_NEG;
           Log("modify TK_NEG at position %d", i);
-          break;
-        case '-':
-          tokens[i].type = TK_NEG;
-          Log("modify TK_NEG at position %d", i);
-          break;
-        case '*':
-          tokens[i].type = TK_NEG;
-          Log("modify TK_NEG at position %d", i);
-          break;
-        case '/':
-          tokens[i].type = TK_NEG;
-          Log("modify TK_NEG at position %d", i);
-          break;
-        case '(':
-          tokens[i].type = TK_NEG;
-          Log("modify TK_NEG at position %d", i);
-          break;
-        case TK_NEG:
-          tokens[i].type = TK_NEG;
-          Log("modify TK_NEG at position %d", i);
-          break;
-        default:
-          break;
+          tokens[0].type = TK_NEG;
         }
       }
     }
