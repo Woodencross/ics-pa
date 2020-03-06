@@ -151,7 +151,7 @@ int findDominantOp(int p,int q){
   }
   int level=0;
   int pos[2]={0,0};
-  for(int curr=p+1;curr<q;curr++){
+  for(int curr=p;curr<q;curr++){
     if(tokens[curr].type=='('){
       level++;
     }
