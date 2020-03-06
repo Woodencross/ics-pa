@@ -114,6 +114,106 @@ static bool make_token(char *e) {
   return true;
 }
 
+bool check_parentheses(int p,int q){
+  if(p>=q){
+    printf("error:p>=q in check_parentheses()\n");
+    return false;
+  }
+  if(tokens[p].type!='('||tokens[q].type!=')'){
+    return false;
+  }
+  int count=0;
+  for(int curr=p+1;curr<q;curr++){
+    if(tokens[curr].type=='('){
+      count++;
+    }
+    if(tokens[curr].type==')'){
+      if(count>0){
+        count--;
+      }
+      else{
+        return false;
+      }
+    }
+  }
+  if(count==0){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+int findDominantOp(int p,int q){
+  if(p>=q){
+    printf("error:p>=q in findDominantOp()\n");
+    return -1;
+  }
+  int level=0;
+  int pos[2]={0,0};
+  for(int curr=p+1;curr<q;curr++){
+    if(tokens[curr].type=='('){
+      level++;
+    }
+    else if(tokens[curr].type==')'){
+      if(level>0){
+        level--;
+      }
+      else{
+        printf("parentheses not match in findDominantOp()\n");
+        return -1;
+      }
+    }
+    if(level==0){
+      if(tokens[curr].type=='+'||tokens[curr].type=='-'){
+        pos[0]=curr;
+      }
+      if(tokens[curr].type=='*'||tokens[curr].type=='/'){
+        pos[1]=curr;
+      }
+    }
+  }
+  if(pos[0]==0&&pos[1]==0){
+    printf("cannot find dominant op in fingDominantOp()\n");
+    return -1;
+  }
+  if(pos[0]!=0){
+    return pos[0];
+  }
+  return pos[1];
+}
+
+int eval(int p,int q){
+  if(p>q){
+    printf("bad expression in eval()\n");
+    assert(0);
+  }
+  else if(p==q){
+    return atoi(tokens[p].str);
+  }
+  else if(check_parentheses(p,q)==true){
+    return eval(p+1,q-1);
+  }
+  else{
+    int op=findDominantOp(p,q);
+    int val_1=eval(p,op-1);
+    int val_2=eval(op+1,q);
+    switch(tokens[op].type){
+      case '+':
+        return val_1+val_2;
+      case '-':
+        return val_1-val_2;
+      case '*':
+        return val_1*val_2;
+      case '/':
+        return val_1/val_2;
+      default:
+        printf("error in eval()\n");
+        assert(0);
+    }
+  }
+}
+
 uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
@@ -121,7 +221,7 @@ uint32_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
-
-  return 0;
+  //TODO();
+  *success=true;
+  return eval(0,nr_token-1);
 }
