@@ -275,7 +275,7 @@ int eval(int p, int q)
       {
         if (strcmp(tokens[p].str, regsl[i]) == 0)
         {
-          return cpu.gpr[check_reg_index(i)]._32;
+          return cpu.gpr[check_reg_index(i)]._32; //reg_l()报错undeclared？
         }
         if (strcmp(tokens[p].str, regsw[i]) == 0)
         {
@@ -367,7 +367,7 @@ int eval(int p, int q)
       assert(0);
     }
   }
-  return 0;//???
+  return 0; //???
 }
 
 uint32_t expr(char *e, bool *success)
@@ -398,10 +398,18 @@ uint32_t expr(char *e, bool *success)
     {
       if (tokens[i].type == '-')
       {
-        if (tokens[i - 1].type == '+' || tokens[i - 1].type == '-' || tokens[i - 1].type == '*' || tokens[i - 1].type == '/' || tokens[i - 1].type == '(' || tokens[i - 1].type == TK_NEG)
+        if (tokens[i - 1].type == '+' || tokens[i - 1].type == '-' || tokens[i - 1].type == '*' || tokens[i - 1].type == '/' || tokens[i - 1].type == '(' || tokens[i - 1].type == TK_NEG || tokens[i - 1].type == TK_EQ || tokens[i - 1].type == TK_NEQ || tokens[i - 1].type == TK_AND || tokens[i - 1].type == TK_OR || tokens[i - 1].type == '!')
         {
           Log("modify TK_NEG at position %d", i);
           tokens[0].type = TK_NEG;
+        }
+      }
+      if (tokens[i].type == '*')
+      {
+        if (tokens[i - 1].type == '+' || tokens[i - 1].type == '-' || tokens[i - 1].type == '*' || tokens[i - 1].type == '/' || tokens[i - 1].type == '(' || tokens[i - 1].type == TK_NEG || tokens[i - 1].type == TK_EQ || tokens[i - 1].type == TK_NEQ || tokens[i - 1].type == TK_AND || tokens[i - 1].type == TK_OR || tokens[i - 1].type == '!')
+        {
+          Log("modify TK_DEREF at position %d", i);
+          tokens[0].type = TK_DEREF;
         }
       }
     }
