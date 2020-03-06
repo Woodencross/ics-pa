@@ -10,8 +10,14 @@ enum
 {
   TK_NOTYPE = 256,
   TK_EQ,
+  TK_NEQ,
+  TK_AND,
+  TK_OR,
   TK_NUMBER,
-  TK_NEG //负号
+  TK_HEX,   //十六进制
+  TK_NEG,   //负号
+  TK_DEREF, //解引用
+  TK_REG,
 
   /* TODO: Add more token types */
 
@@ -35,7 +41,13 @@ static struct rule
     {"\\(", '('},
     {"\\)", ')'},
     {"==", TK_EQ}, // equal
-    {"0|[1-9][0-9]*", TK_NUMBER}
+    {"0x[1-9A-Fa-f][0-9A-Fa-f]*", TK_HEX},
+    {"0|[1-9][0-9]*", TK_NUMBER},
+    {"!=", TK_NEQ},
+    {"&&", TK_AND},
+    {"\\|\\|", TK_OR},
+    {"!", '!'},
+    {"\\$(eax|ecx|edx|ebx|esp|ebp|esi|edi|eip|ax|cx|dx|bx|sp|bp|si|di|al|cl|dl|bl|ah|ch|dh|bh)", TK_REG},
 
 };
 
@@ -113,8 +125,15 @@ static bool make_token(char *e)
           strncpy(tokens[nr_token].str, substr_start, substr_len);
           *(tokens[nr_token].str + substr_len) = '\0';
           break;
+        case TK_HEX:
+          strncpy(tokens[nr_token].str, substr_start + 2, substr_len - 2);
+          break;
+        case TK_REG:
+          strncpy(tokens[nr_token].str, substr_start + 1, substr_len - 1);
+          break;
         default:;
         }
+        printf("Success record : nr_token=%d, type=%d, str=%s\n", nr_token, tokens[nr_token].type, tokens[nr_token].str);
         nr_token++;
         break;
       }
@@ -178,8 +197,8 @@ int findDominantOp(int p, int q)
     return -1;
   }
   int level = 0;
-  int pos[2] = {0, 0};
-  for (int curr = p; curr < q; curr++)
+  int pos[5] = {-1, -1, -1, -1, -1}; //[0]:&&,|| [1]:==,!= [2]:+,- [3]:*,/ [4]:TK_NEG, TK_DEREF, !
+  for (int curr = p; curr <= q; curr++)
   {
     if (tokens[curr].type == '(')
     {
@@ -191,26 +210,46 @@ int findDominantOp(int p, int q)
     }
     if (level == 0)
     {
-      if (tokens[curr].type == '+' || tokens[curr].type == '-')
+      switch (tokens[curr].type)
       {
-        pos[0] = curr;
-      }
-      if (tokens[curr].type == '*' || tokens[curr].type == '/')
-      {
+      case TK_NEG:
+      case TK_DEREF:
+      case '!':
+        pos[4] = curr;
+        break;
+      case '/':
+      case '*':
+        pos[3] = curr;
+        break;
+      case '+':
+      case '-':
+        pos[2] = curr;
+        break;
+      case TK_EQ:
+      case TK_NEQ:
         pos[1] = curr;
+        break;
+      case TK_AND:
+      case TK_OR:
+        pos[0] = curr;
+        break;
+      default:;
       }
     }
   }
-  if (pos[0] == 0 && pos[1] == 0)
+  for (int i = 0; i < 5; i++)
   {
-    printf("cannot find dominant op in fingDominantOp()\n");
-    return -1;
+    if (pos[i] != -1)
+    {
+      return pos[i];
+    }
   }
-  if (pos[0] != 0)
+  for (int i = 0; i < 5; i++)
   {
-    return pos[0];
+    printf("%d", pos[i]);
   }
-  return pos[1];
+  printf("error in findDominantOp(): p = %d, q = %d", p, q);
+  assert(0);
 }
 
 int eval(int p, int q)
@@ -265,13 +304,18 @@ uint32_t expr(char *e, bool *success)
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
   *success = true;
-  //识别负号
+  //识别负号与解引用
   if (nr_token != 1)
   {
     if (tokens[0].type == '-')
     {
       Log("modify TK_NEG at position 0");
       tokens[0].type = TK_NEG;
+    }
+    if (tokens[0].type == '*')
+    {
+      Log("modify TK_DEREF at position 0");
+      tokens[0].type = TK_DEREF;
     }
     for (int i = 1; i < nr_token; i++)
     {
