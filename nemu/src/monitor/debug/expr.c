@@ -129,7 +129,7 @@ static bool make_token(char *e)
           strncpy(tokens[nr_token].str, substr_start + 2, substr_len - 2);
           break;
         case TK_REG:
-          strncpy(tokens[nr_token].str, substr_start + 1, substr_len - 1);
+          strncpy(tokens[nr_token].str, substr_start + 1, substr_len - 2);
           break;
         default:;
         }
