@@ -156,13 +156,7 @@ int findDominantOp(int p,int q){
       level++;
     }
     else if(tokens[curr].type==')'){
-      if(level>0){
-        level--;
-      }
-      else{
-        printf("parentheses not match in findDominantOp()\n");
-        return -1;
-      }
+      level--;
     }
     if(level==0){
       if(tokens[curr].type=='+'||tokens[curr].type=='-'){
@@ -196,6 +190,9 @@ int eval(int p,int q){
   }
   else{
     int op=findDominantOp(p,q);
+    if(op==-1){
+      assert(0);
+    }
     int val_1=eval(p,op-1);
     int val_2=eval(op+1,q);
     switch(tokens[op].type){
