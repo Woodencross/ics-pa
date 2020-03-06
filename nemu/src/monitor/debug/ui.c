@@ -105,7 +105,20 @@ static int cmd_x(char *args){
   return 0;
 }
 
-//static int cmd_p(char *args){}
+static int cmd_p(char *args){
+  if(args==NULL){
+    printf("args error in cmd_p\n");
+    return 0;
+  }
+  bool success=false;
+  int res=expr(args,&success);
+  if(success==false){
+    printf("error in expr()");
+    return 0;
+  }
+  printf("The value of expr is:%d\n",res);
+  return 0;
+}
 
 //static int cmd_w(char *args){}
 
@@ -122,7 +135,7 @@ static struct {
   { "si", "args: [N]; execute [N] instructions step by step", cmd_si },
   { "info", "args: r/w; print information about register or watchpoint", cmd_info },
   { "x", "x [N] [EXPR]; scan the memory", cmd_x },
-  //{ "p", "expr", cmd_p },
+  { "p", "expr", cmd_p },
   //{ "w", "set the watchpoint", cmd_w },
   //{ "d", "delete the watchpoint", cmd_d },
 
