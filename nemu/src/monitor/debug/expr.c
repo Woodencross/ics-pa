@@ -30,7 +30,7 @@ static struct rule {
   {"\\(", '('},
   {"\\)", ')'},
   {"==", TK_EQ},                    // equal
-  {"0x[0-9A-Fa-f]*", TK_NUMBER}       //十六进制
+  {"0|[1-9][0-9]*", TK_NUMBER}
 
 };
 
