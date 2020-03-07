@@ -112,6 +112,7 @@ static int cmd_x(char *args)
     printf("args error in cmd_x\n");
     return 0;
   }
+  printf("%s\n", temp);
   char *addr_str = NULL;
   sprintf(addr_str, "%x", expr(temp, false));
   sscanf(addr_str, "%x", &addr);
