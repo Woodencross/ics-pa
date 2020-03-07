@@ -264,7 +264,7 @@ int eval(int p, int q)
   }
   else if (p == q)
   {
-    int num;
+    uint32_t num;
     switch (tokens[p].type)
     {
     case TK_NUMBER:
