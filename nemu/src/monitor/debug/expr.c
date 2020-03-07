@@ -243,7 +243,7 @@ int findDominantOp(int p, int q)
   {
     if (pos[i] != -1)
     {
-      //printf("dominant op is %d at position %d\n", tokens[pos[i]].type, pos[i]);
+      printf("findDominantOP() : dominant op is level %d : %d at position %d\n", i, tokens[pos[i]].type, pos[i]);
       return pos[i];
     }
   }
