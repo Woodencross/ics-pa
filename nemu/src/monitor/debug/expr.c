@@ -324,7 +324,7 @@ int eval(int p, int q)
     {
       assert(0);
     }
-    printf("dominant op is at position %d\n", op);
+    printf("dominant op is %d at position %d\n", tokens[op].type, op);
     switch (tokens[op].type)
     {
     case TK_NEG:
