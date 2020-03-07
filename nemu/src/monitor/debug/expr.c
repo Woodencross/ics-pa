@@ -405,7 +405,7 @@ uint32_t expr(char *e, bool *success)
         if (tokens[i - 1].type == '+' || tokens[i - 1].type == '-' || tokens[i - 1].type == '*' || tokens[i - 1].type == '/' || tokens[i - 1].type == '(' || tokens[i - 1].type == TK_NEG || tokens[i - 1].type == TK_EQ || tokens[i - 1].type == TK_NEQ || tokens[i - 1].type == TK_AND || tokens[i - 1].type == TK_OR || tokens[i - 1].type == '!')
         {
           Log("modify TK_NEG at position %d", i);
-          tokens[0].type = TK_NEG;
+          tokens[i].type = TK_NEG;
         }
       }
       if (tokens[i].type == '*')
@@ -413,7 +413,7 @@ uint32_t expr(char *e, bool *success)
         if (tokens[i - 1].type == '+' || tokens[i - 1].type == '-' || tokens[i - 1].type == '*' || tokens[i - 1].type == '/' || tokens[i - 1].type == '(' || tokens[i - 1].type == TK_NEG || tokens[i - 1].type == TK_EQ || tokens[i - 1].type == TK_NEQ || tokens[i - 1].type == TK_AND || tokens[i - 1].type == TK_OR || tokens[i - 1].type == '!')
         {
           Log("modify TK_DEREF at position %d", i);
-          tokens[0].type = TK_DEREF;
+          tokens[i].type = TK_DEREF;
         }
       }
     }
