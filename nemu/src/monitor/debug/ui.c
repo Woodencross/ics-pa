@@ -104,12 +104,17 @@ static int cmd_x(char *args)
 {
   int nLen = 0;
   vaddr_t addr;
-  int nRet = sscanf(args, "%d  0x%x", &nLen, &addr);
+  //int nRet = sscanf(args, "%d  0x%x", &nLen, &addr);
+  char *arg = NULL;
+  int nRet = sscanf(args, "%d %s", &nLen, arg);
   if (nRet <= 0)
   {
     printf("args error in cmd_x\n");
     return 0;
   }
+
+  addr = expr(arg, false);
+
   printf("Memory:");
   for (int i = 0; i < nLen; i++)
   {
