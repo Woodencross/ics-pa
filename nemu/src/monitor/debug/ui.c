@@ -122,11 +122,11 @@ static int cmd_x(char *args)
   {
     if (i % 4 == 0)
     {
-      printf("\n0x%x:   0x%08x", addr + i, vaddr_read(addr + i, 1));
+      printf("\n0x%x:   0x%02x", addr + i, vaddr_read(addr + i, 1));
     }
     else
     {
-      printf("  0x%08x", vaddr_read(addr + i, 1));
+      printf("  0x%02x", vaddr_read(addr + i, 1));
     }
   }
   printf("\n");
