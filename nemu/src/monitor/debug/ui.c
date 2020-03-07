@@ -106,7 +106,7 @@ static int cmd_x(char *args)
   vaddr_t addr;
   //int nRet = sscanf(args, "%d  0x%x", &nLen, &addr);
   char *arg = NULL;
-  int nRet = sscanf(args, "%d %s", &nLen, arg);
+  int nRet = sscanf(args, "%d  %s", &nLen, arg);
   printf("%s\n", arg);
   if (nRet <= 0)
   {
