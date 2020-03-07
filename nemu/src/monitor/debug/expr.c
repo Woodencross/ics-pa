@@ -243,7 +243,7 @@ int findDominantOp(int p, int q)
   {
     if (pos[i] != -1)
     {
-      printf("dominant op is %d at position %d\n", tokens[pos[i]].type, pos[i]);
+      //printf("dominant op is %d at position %d\n", tokens[pos[i]].type, pos[i]);
       return pos[i];
     }
   }
@@ -324,6 +324,7 @@ int eval(int p, int q)
     {
       assert(0);
     }
+    printf("dominant op is at position %d\n", op);
     switch (tokens[op].type)
     {
     case TK_NEG:
