@@ -114,7 +114,8 @@ static int cmd_x(char *args)
     return 0;
   }
 
-  addr = expr(s, false);
+  bool success = false;
+  addr = expr(s, &success);
 
   printf("Memory:");
   for (int i = 0; i < nLen; i++)
