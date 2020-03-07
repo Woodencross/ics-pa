@@ -107,6 +107,7 @@ static int cmd_x(char *args)
   //int nRet = sscanf(args, "%d  0x%x", &nLen, &addr);
   char *arg = NULL;
   int nRet = sscanf(args, "%d %s", &nLen, arg);
+  printf("%s\n", arg);
   if (nRet <= 0)
   {
     printf("args error in cmd_x\n");
