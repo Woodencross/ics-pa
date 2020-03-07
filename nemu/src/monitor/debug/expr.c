@@ -255,7 +255,7 @@ int findDominantOp(int p, int q)
   assert(0);
 }
 
-int eval(int p, int q)
+uint32_t eval(int p, int q)
 {
   if (p > q)
   {
@@ -319,7 +319,7 @@ int eval(int p, int q)
   {
     int op = findDominantOp(p, q);
     vaddr_t addr;
-    int result;
+    uint32_t result;
     if (op == -1)
     {
       assert(0);
@@ -346,8 +346,8 @@ int eval(int p, int q)
       }
     }
 
-    int val_1 = eval(p, op - 1);
-    int val_2 = eval(op + 1, q);
+    uint32_t val_1 = eval(p, op - 1);
+    uint32_t val_2 = eval(op + 1, q);
     switch (tokens[op].type)
     {
     case '+':
