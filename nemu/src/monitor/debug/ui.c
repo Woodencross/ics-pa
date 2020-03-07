@@ -134,7 +134,7 @@ static int cmd_p(char *args)
     return 0;
   }
   bool success = false;
-  int res = expr(args, &success);
+  uint32_t res = expr(args, &success);
   if (success == false)
   {
     printf("error in expr()");
