@@ -118,7 +118,7 @@ static int cmd_x(char *args)
   addr = expr(s, &success);
 
   printf("Memory:");
-  for (int i = 0; i < nLen; i++)
+  for (int i = 0; i < nLen; i+=4)
   {
     if (i % 4 == 0)
     {
