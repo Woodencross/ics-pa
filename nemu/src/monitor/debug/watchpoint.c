@@ -74,7 +74,7 @@ bool free_wp(int num)
   WP *thewp = NULL;
   if (head == NULL)
   {
-    printf("No watchpoint now\n");
+    printf("No watchpoint now to free\n");
     return false;
   }
 
@@ -106,3 +106,21 @@ bool free_wp(int num)
   }
   return false;
 }
+
+void print_wp()
+{
+  if (head == NULL)
+  {
+    printf("no watchpoint now to print\n");
+    return;
+  }
+  printf("watchpoint:\n");
+  printf("NO.   expr                hitNum\n");
+  wptemp = head;
+  while (wptemp != NULL)
+  {
+    printf("%d    %s                %d\n", wptemp->NO, wptemp->e, wptemp->hitNum);
+    wptemp = wptemp->next;
+  }
+}
+
