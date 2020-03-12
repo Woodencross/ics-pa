@@ -124,3 +124,27 @@ void print_wp()
   }
 }
 
+bool watch_wp()
+{
+  bool success;
+  int result;
+  if (head == NULL)
+  {
+    return true;
+  }
+  wptemp = head;
+  while (wptemp != NULL)
+  {
+    result = expr(wptemp->e, &success);
+    if (result != wptemp->oldValue)
+    {
+      wptemp->hitNum++;
+      printf("Hardware watchpoint %d: %s\n", wptemp->NO, wptemp->e);
+      printf("Old value: %d\nNew value: %d\n\n", wptemp->oldValue, result);
+      wptemp->oldValue = result;
+      return false;
+    }
+    wptemp = wptemp->next;
+  }
+  return true;
+}
