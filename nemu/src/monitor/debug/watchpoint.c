@@ -119,7 +119,7 @@ void print_wp()
   wptemp = head;
   while (wptemp != NULL)
   {
-    printf("\t%d\t%s\t%d\n", wptemp->NO, wptemp->e, wptemp->hitNum);
+    printf("%d    %s            %d\n", wptemp->NO, wptemp->e, wptemp->hitNum);
     wptemp = wptemp->next;
   }
 }
