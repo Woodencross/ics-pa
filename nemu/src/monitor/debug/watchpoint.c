@@ -115,7 +115,7 @@ void print_wp()
     return;
   }
   printf("watchpoint:\n");
-  printf("NO.   expr                hitNum\n");
+  printf("NO.   \texpr          \thitNum\n");
   wptemp = head;
   while (wptemp != NULL)
   {
