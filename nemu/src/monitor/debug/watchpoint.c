@@ -115,11 +115,11 @@ void print_wp()
     return;
   }
   printf("watchpoint:\n");
-  printf("NO.   \texpr          \thitNum\n");
+  printf("NO. \texpr  \thitNum\n");
   wptemp = head;
   while (wptemp != NULL)
   {
-    printf("%d  \t%s          \t%d\n", wptemp->NO, wptemp->e, wptemp->hitNum);
+    printf("%d  \t%s  \t%d\n", wptemp->NO, wptemp->e, wptemp->hitNum);
     wptemp = wptemp->next;
   }
 }
