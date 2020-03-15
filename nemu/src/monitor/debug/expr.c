@@ -135,7 +135,7 @@ static bool make_token(char *e)
           break;
         default:;
         }
-        printf("Success record : nr_token=%d, type=%d, str=%s\n", nr_token, tokens[nr_token].type, tokens[nr_token].str);
+        //printf("Success record : nr_token=%d, type=%d, str=%s\n", nr_token, tokens[nr_token].type, tokens[nr_token].str);
         nr_token++;
         break;
       }
@@ -278,15 +278,15 @@ uint32_t eval(int p, int q)
       {
         if (strcmp(tokens[p].str, regsl[i]) == 0)
         {
-          return cpu.gpr[check_reg_index(i)]._32; //reg_l()报错undeclared？
+          return reg_l(i); //reg_l()报错undeclared？
         }
         if (strcmp(tokens[p].str, regsw[i]) == 0)
         {
-          return cpu.gpr[check_reg_index(i)]._16;
+          return reg_w(i);
         }
         if (strcmp(tokens[p].str, regsb[i]) == 0)
         {
-          return cpu.gpr[check_reg_index(i) & 0x3]._8[i >> 2];
+          return reg_b(i);
         }
         if (strcmp(tokens[p].str, "eip") == 0)
         {
