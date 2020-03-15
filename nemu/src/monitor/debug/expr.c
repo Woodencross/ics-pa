@@ -102,9 +102,11 @@ static bool make_token(char *e)
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
+        /* 
         Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
         position += substr_len;
+        */
 
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
@@ -243,7 +245,7 @@ int findDominantOp(int p, int q)
   {
     if (pos[i] != -1)
     {
-      printf("findDominantOP() : dominant op is level %d : %d at position %d\n", i, tokens[pos[i]].type, pos[i]);
+      //printf("findDominantOP() : dominant op is level %d : %d at position %d\n", i, tokens[pos[i]].type, pos[i]);
       return pos[i];
     }
   }
@@ -324,7 +326,7 @@ uint32_t eval(int p, int q)
     {
       assert(0);
     }
-    printf("dominant op is %d at position %d\n", tokens[op].type, op);
+    //printf("dominant op is %d at position %d\n", tokens[op].type, op);
     switch (tokens[op].type)
     {
     case TK_NEG:
@@ -390,12 +392,12 @@ uint32_t expr(char *e, bool *success)
   {
     if (tokens[0].type == '-')
     {
-      Log("modify TK_NEG at position 0");
+      //Log("modify TK_NEG at position 0");
       tokens[0].type = TK_NEG;
     }
     if (tokens[0].type == '*')
     {
-      Log("modify TK_DEREF at position 0");
+      //Log("modify TK_DEREF at position 0");
       tokens[0].type = TK_DEREF;
     }
     for (int i = 1; i < nr_token; i++)
@@ -404,7 +406,7 @@ uint32_t expr(char *e, bool *success)
       {
         if (tokens[i - 1].type == '+' || tokens[i - 1].type == '-' || tokens[i - 1].type == '*' || tokens[i - 1].type == '/' || tokens[i - 1].type == '(' || tokens[i - 1].type == TK_NEG || tokens[i - 1].type == TK_EQ || tokens[i - 1].type == TK_NEQ || tokens[i - 1].type == TK_AND || tokens[i - 1].type == TK_OR || tokens[i - 1].type == '!')
         {
-          Log("modify TK_NEG at position %d", i);
+          //Log("modify TK_NEG at position %d", i);
           tokens[i].type = TK_NEG;
         }
       }
@@ -412,7 +414,7 @@ uint32_t expr(char *e, bool *success)
       {
         if (tokens[i - 1].type == '+' || tokens[i - 1].type == '-' || tokens[i - 1].type == '*' || tokens[i - 1].type == '/' || tokens[i - 1].type == '(' || tokens[i - 1].type == TK_NEG || tokens[i - 1].type == TK_EQ || tokens[i - 1].type == TK_NEQ || tokens[i - 1].type == TK_AND || tokens[i - 1].type == TK_OR || tokens[i - 1].type == '!')
         {
-          Log("modify TK_DEREF at position %d", i);
+          //Log("modify TK_DEREF at position %d", i);
           tokens[i].type = TK_DEREF;
         }
       }
