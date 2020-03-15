@@ -135,7 +135,7 @@ static bool make_token(char *e)
           break;
         default:;
         }
-        printf("Success record : nr_token=%d, type=%d, str=%s\n", nr_token, tokens[nr_token].type, tokens[nr_token].str);
+        //printf("Success record : nr_token=%d, type=%d, str=%s\n", nr_token, tokens[nr_token].type, tokens[nr_token].str);
         nr_token++;
         break;
       }
