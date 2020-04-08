@@ -1,5 +1,26 @@
 #include "cpu/exec.h"
 
+static inline void eflags_modify(){
+  rtl_sub(&t2,&id_dest->val,&id_src->val);
+
+  //ZF SF
+  rtl_update_ZFSF(&t2,id_dest->width);
+
+  //CF
+  //CF=1的判断：作为无符号数的被减数小于同样无符号数的减数
+  rtl_sltu(&t0,&id_dest->val,&id_src->val);
+  rtl_set_CF(&t0);
+
+  //OF
+  //OF的判断：正-负=负 或 负-正=正 时为发生溢出，使用最高位判断正负
+  //即被减数同时与 减数/差 异号
+  rtl_xor(&t0,&id_dest->val,&id_src->val);
+  rtl_xor(&t1,&id_dest->val,&t2);//t2里是差
+  rtl_and(&t0,&t0,&t1);
+  rtl_msb(&t0,&t0,id_dest->width);
+  rtl_set_OF(&t0);
+}
+
 make_EHelper(add) {
   TODO();
 
@@ -7,7 +28,9 @@ make_EHelper(add) {
 }
 
 make_EHelper(sub) {
-  TODO();
+  //TODO();
+  eflags_modify();
+  operand_write(id_dest,&t2);
 
   print_asm_template2(sub);
 }

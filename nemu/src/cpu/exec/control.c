@@ -25,9 +25,9 @@ make_EHelper(jmp_rm) {
 
 make_EHelper(call) {
   // the target address is calculated at the decode stage
-  //TODO();
+  // TODO();
   rtl_li(&t2,decoding.seq_eip);
-  rtl_push(&t2);//为什么不直接push(eip)?
+  rtl_push(&t2);//为什么不直接push(seq_eip)? 因为push()参数是指针，seq_eip是uint32_t
   decoding.is_jmp=1;
 
   print_asm("call %x", decoding.jmp_eip);
