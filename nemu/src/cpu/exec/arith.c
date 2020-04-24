@@ -22,7 +22,24 @@ static inline void eflags_modify(){
 }
 
 make_EHelper(add) {
-  TODO();
+  //TODO();
+  /*
+  rtl_add(&t2,%id_dest->val,&id_src->val);
+  operand_write(id_dest,&t2);
+
+  rtl_update_ZFSF(&t2,id_dest->width);
+
+  //CF=1的判断：1+1=0（进位），即当无符号数比较，结果<任一加数时，CF=1
+  rtl_sltu(&t0,&t2,&id_dest->val);
+  rtl_set_CF(&t0);
+
+  //OF的判断：正+正=负 或 负+负=正 时为发生溢出（使用最高位来判断正负），即结果同时与两个加数异号
+  rtl_xor(&t0,&id_src->val,&t2);
+  rtl_xor(&t1,&id_dest->val,&t2);
+  rtl_and(&t0,&t0,&t1);
+  rtl_msb(&t0,&t0,id_dest->width);//取表示正负的最高位
+  rtl_set_OF(&t0);
+  */
 
   print_asm_template2(add);
 }
