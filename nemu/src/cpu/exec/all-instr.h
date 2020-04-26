@@ -44,3 +44,4 @@ make_EHelper(call_rm);
 make_EHelper(sbb);
 make_EHelper(div);
 make_EHelper(neg);
+make_EHelper(mul);
