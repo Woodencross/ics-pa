@@ -31,3 +31,5 @@ make_EHelper(sar);
 make_EHelper(dec);
 make_EHelper(not);
 make_EHelper(inc);
+make_EHelper(jmp);
+make_EHelper(jmp_rm);
