@@ -58,7 +58,6 @@ make_EHelper(cwtl) {
   if (decoding.is_operand_size_16) {
     //TODO();
     rtl_sext(&t0,&cpu.eax,1);
-    //cpu.eax=(cpu.eax&0xffff0000)|(t0&0xffff);
     rtl_sr_w(R_AX,&t0);
   }
   else {
