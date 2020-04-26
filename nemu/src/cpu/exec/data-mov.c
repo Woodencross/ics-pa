@@ -66,8 +66,7 @@ make_EHelper(cwtl) {
     //TODO();
     rtl_lr_w(&t0,R_AX);
     rtl_sext(&t0,&t0,2);
-    rtl_sari(&t0,&t0,31);
-    rtl_sr_l(R_EAX,&t0);
+    rtl_sari(&cpu.eax,&t0,31);
   }
 
   print_asm(decoding.is_operand_size_16 ? "cbtw" : "cwtl");
