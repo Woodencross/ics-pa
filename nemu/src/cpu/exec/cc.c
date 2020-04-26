@@ -23,8 +23,8 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
     case CC_E:
       rtl_get_ZF(dest);
     case CC_NE:
-      rtl_xor(&t2,dest,dest);
-      rtl_get_ZF(&t2);
+      *dest=cpu.eflags.ZF!=1?1:0;
+      break;
     case CC_BE:
       assert(dest!=&t0);
       rtl_get_CF(dest);
