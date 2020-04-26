@@ -57,13 +57,16 @@ make_EHelper(cltd) {
 make_EHelper(cwtl) {
   if (decoding.is_operand_size_16) {
     //TODO();
-    rtl_sext(&t0,&cpu.eax,1);
-    cpu.eax=(cpu.eax&0xffff0000)|(t0&0xffff);
+    rtl_lr_b(&t0,R_AL);
+    rtl_sext(&t0,&t0,1);
+    rtl_sari(&t0,&t0,31);
+    rtl_sr_w(R_AX,&t0);
   }
   else {
     //TODO();
-    rtl_sext(&t0,&cpu.eax,2);
-    cpu.eax=t0;
+    rtl_lr_w(&t0,R_AX);
+    rtl_sext(&t0,&t0,2);
+    rtl_sari(&cpu.eax,&t0,31);
   }
 
   print_asm(decoding.is_operand_size_16 ? "cbtw" : "cwtl");
