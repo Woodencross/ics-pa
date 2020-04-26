@@ -64,9 +64,7 @@ make_EHelper(cwtl) {
   }
   else {
     //TODO();
-    rtl_lr_w(&t0,R_AX);
-    rtl_sext(&t0,&t0,2);
-    rtl_sari(&cpu.eax,&t0,31);
+    rtl_sari(R_EAX,R_AX,15);
   }
 
   print_asm(decoding.is_operand_size_16 ? "cbtw" : "cwtl");
