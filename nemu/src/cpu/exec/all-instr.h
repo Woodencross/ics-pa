@@ -26,5 +26,5 @@ make_EHelper(jcc);
 make_EHelper(adc);
 make_EHelper(or);
 make_EHelper(shl);
-make_EHelper(sal);
+make_EHelper(shr);
 make_EHelper(sar);
