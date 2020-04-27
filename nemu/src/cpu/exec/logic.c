@@ -102,7 +102,8 @@ make_EHelper(not) {
 
 //源代码框架中没有这个
 make_EHelper(rol){
-  while(id_src->val--){
+  rtl_li(&t2,id_src->val);
+  while(t2--){
     rtl_msb(&t0,&id_dest->val,id_dest->width);
     id_dest->val<<=1;
     id_dest->val|=t0;
