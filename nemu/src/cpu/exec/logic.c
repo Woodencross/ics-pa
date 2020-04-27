@@ -105,7 +105,7 @@ make_EHelper(rol){
   while(id_src->val--){
     rtl_msb(&t0,&id_dest->val,id_dest->width);
     rtl_shli(&id_dest->val,&id_dest->val,1);
-    rtl_add(&t0,&t0,&id_dest->val);
+    rtl_or(&t0,&t0,&id_dest->val);
   }
   operand_write(id_dest,&t0);
 
