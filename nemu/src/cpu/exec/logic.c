@@ -104,10 +104,10 @@ make_EHelper(not) {
 make_EHelper(rol){
   while(id_src->val--){
     rtl_msb(&t0,&id_dest->val,id_dest->width);
-    rtl_shli(&id_dest->val,&id_dest->val,1);
-    rtl_or(&t0,&t0,&id_dest->val);
+    id_dest->val<<=1;
+    id_dest->val|=t0;
   }
-  operand_write(id_dest,&t0);
+  operand_write(id_dest,&id_dest->val);
 
   print_asm_template2(rol);
 }
