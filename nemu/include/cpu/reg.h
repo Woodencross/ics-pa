@@ -31,7 +31,7 @@ typedef struct {
   };
   vaddr_t eip;
 
-  //实现eflags寄存器
+  //eflags寄存器
   struct bs{
     unsigned int CF:1;
     unsigned int one:1;
@@ -46,11 +46,14 @@ typedef struct {
     unsigned int :20;
   } eflags;
 
-  //实现IDTR寄存器
+  //IDTR寄存器
   struct IDTR{
     uint32_t base;
     uint16_t limit;
   } idtr;
+
+  //CS寄存器
+  rtlreg_t cs;
 } CPU_state;
 
 extern CPU_state cpu;

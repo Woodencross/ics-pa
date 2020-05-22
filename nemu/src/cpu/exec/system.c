@@ -17,7 +17,7 @@ make_EHelper(lidt) {
   Log("idtr.limit=0x%x",cpu.idtr.limit);
   Log("idtr.base=0x%x",cpu.idtr.base);
   #endif
-  
+
   print_asm_template1(lidt);
 }
 
@@ -37,8 +37,12 @@ make_EHelper(mov_cr2r) {
 #endif
 }
 
+extern void raise_intr(uint8_t NO, vaddr_t ret_addr);
 make_EHelper(int) {
-  TODO();
+  //TODO();
+
+  uint8_t NO=id_dest->val&0xff;
+  raise_intr(NO,decoding.seq_eip);
 
   print_asm("int %s", id_dest->str);
 
