@@ -26,6 +26,7 @@ int sys_write(int fd,void* buf,int len){
 }
 
 _RegSet* do_syscall(_RegSet *r) {
+  Log("here in do_syscall");
   uintptr_t a[4];
   a[0] = SYSCALL_ARG1(r);
   a[1]=SYSCALL_ARG2(r);
