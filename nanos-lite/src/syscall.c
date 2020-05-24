@@ -11,6 +11,7 @@ void sys_exit(int a){
 
 int sys_write(int fd,void* buf,int len){
   if(fd==1||fd==2){
+    Log("here in sys_write()");
     char c;
     for(int i=0;i<len;i++){
       memcpy(&c,buf+i,1);
