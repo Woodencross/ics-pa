@@ -5,4 +5,9 @@
 
 enum {SEEK_SET, SEEK_CUR, SEEK_END};
 
+size_t fs_filesz(int fd);
+int fs_open(const char* filename,int flags,int mode);
+ssize_t fs_read(int fd,void* buf,size_t len);
+int fs_close(int fd);
+
 #endif
