@@ -75,7 +75,7 @@ ssize_t fs_read(int fd,void* buf,size_t len){
   if(n>len){
     n=len;
   }
-  ramdisk_read(buf,disk_offset(fd),n);
+  ramdisk_read(buf,disk_offset(fd)+get_open_offset(fd),n);
   set_open_offset(fd,get_open_offset(fd)+n);
   return n;
 }
@@ -83,4 +83,39 @@ ssize_t fs_read(int fd,void* buf,size_t len){
 int fs_close(int fd){
   assert(fd>=0&&fd<NR_FILES);
   return 0;
+}
+
+ssize_t fs_write(int fd,void* buf,size_t len){
+  assert(fd>=0&&fd<NR_FILES);
+  if(fd<3){
+    Log("arg invalid:fd<3");
+    return 0;
+  }
+
+  int n=fs_filesz(fd)-get_open_offset(fd);
+  if(n>len){
+    n=len;
+  }
+  ramdisk_write(buf,disk_offset(fd)+get_open_offset(fd),n);
+  set_open_offset(fd,get_open_offset(fd)+n);
+  return n;
+}
+
+off_t fs_lseek(int fd,off_t offset,int whence){
+  switch(whence){
+    case SEEK_SET:
+      set_open_offset(fd,offset);
+      return get_open_offset(fd);
+    break;
+    case SEEK_CUR:
+      set_open_offset(fd,get_open_offset(fd)+offset);
+      return get_open_offset(fd);
+    break;
+    case SEEK_END:
+      set_open_offset(fd,fs_filesz(fd)+offset);
+      return get_open_offset(fd);
+    default:
+      panic("Unhandled whence ID = %d",whence);
+      return -1;
+  }
 }
