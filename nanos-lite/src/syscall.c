@@ -11,7 +11,6 @@ void sys_exit(int a){
 
 int sys_write(int fd,void* buf,int len){
   if(fd==1||fd==2){
-    Log("buf=%s",(char*)buf);
     char c;
     for(int i=0;i<len;i++){
       memcpy(&c,buf+i,1);
@@ -26,7 +25,6 @@ int sys_write(int fd,void* buf,int len){
 }
 
 int sys_brk(int addr){
-  Log("here in sys_brk()");
   return 0;
 }
 

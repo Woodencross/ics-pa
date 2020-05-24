@@ -32,7 +32,7 @@ int _write(int fd, void *buf, size_t count){
 
 void *_sbrk(intptr_t increment){
   //return (void *)-1;
-  extern char end;
+  extern int end;
   static uintptr_t probreak=(uintptr_t)&end;//static只初始化一次
 
   uintptr_t probreak_new=probreak+increment;
