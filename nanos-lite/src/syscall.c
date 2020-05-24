@@ -11,7 +11,6 @@ void sys_exit(int a){
 
 int sys_write(int fd,void* buf,int len){
   if(fd==1||fd==2){
-    Log("here in sys_write()");
     char c;
     for(int i=0;i<len;i++){
       memcpy(&c,buf+i,1);
@@ -26,7 +25,6 @@ int sys_write(int fd,void* buf,int len){
 }
 
 _RegSet* do_syscall(_RegSet *r) {
-  Log("here in do_syscall()");
   uintptr_t a[4];
   a[0] = SYSCALL_ARG1(r);
   a[1]=SYSCALL_ARG2(r);
