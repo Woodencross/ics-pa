@@ -30,10 +30,10 @@ int _write(int fd, void *buf, size_t count){
   return _syscall_(SYS_write,fd,(uintptr_t)buf,count);
 }
 
-extern end;
-static uintptr_t probreak=(uintptr_t)&end;//static只初始化一次
 void *_sbrk(intptr_t increment){
   //return (void *)-1;
+  extern end;
+  static uintptr_t probreak=(uintptr_t)&end;//static只初始化一次
 
   uintptr_t probreak_new=probreak+increment;
   int r=_syscall_(SYS_brk,probreak_new,0,0);
