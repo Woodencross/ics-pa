@@ -9,12 +9,12 @@ void sys_exit(int a){
   _halt(a);
 }
 
-int sys_write(int fd,void* buf,size_t len){
+int sys_write(int fd,char* buf,int len){
   if(fd==1||fd==2){
-    char c;
+    //char c;
     for(int i=0;i<len;i++){
-      memcpy(&c,buf+i,1);
-      _putc(c);
+      //memcpy(&c,buf+i,1);
+      _putc(buf[i]);
     }
     return len;
   }
@@ -41,7 +41,7 @@ _RegSet* do_syscall(_RegSet *r) {
     break;
 
     case SYS_write:
-    SYSCALL_ARG1(r)=sys_write(a[1],(void*)a[2],a[3]);
+    SYSCALL_ARG1(r)=sys_write((int)a[1],(char*)a[2],(int)a[3]);
     break;
 
     default: panic("Unhandled syscall ID = %d", a[0]);
