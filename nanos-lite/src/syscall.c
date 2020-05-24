@@ -20,8 +20,8 @@ int sys_write(int fd,void* buf,size_t len){
   }
   else{
     panic("Unhandled fd =%d in sys_write",fd);
-    return -1;
   }
+  return -1;
 }
 
 _RegSet* do_syscall(_RegSet *r) {
