@@ -8,6 +8,7 @@ static const char *keyname[256] __attribute__((used)) = {
   _KEYS(NAME)
 };
 
+
 size_t events_read(void *buf, size_t len) {
   //return 0;
   char str[20];
@@ -17,6 +18,7 @@ size_t events_read(void *buf, size_t len) {
     key^=0x8000;
     down=true;
   }
+  Log("key = %d",key);
   if(key!=_KEY_NONE){
     sprintf(str,"%s %s\n",down?"kd":"ku",keyname[key]);
     Log("here in key!=_KEY_NONE");
