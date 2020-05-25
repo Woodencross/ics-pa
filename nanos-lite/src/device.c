@@ -19,6 +19,7 @@ size_t events_read(void *buf, size_t len) {
   }
   if(key!=_KEY_NONE){
     sprintf(str,"%s %s\n",down?"kd":"ku",keyname[key]);
+    Log("here in if(key!=_KEY_NONE)");
   }
   else{
     sprintf(str,"t %d\n",_uptime());
