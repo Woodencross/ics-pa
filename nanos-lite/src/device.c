@@ -18,14 +18,14 @@ size_t events_read(void *buf, size_t len) {
     key^=0x8000;
     down=true;
   }
-  Log("key = %d",key);
+  //Log("key = %d",key);
   if(key!=_KEY_NONE){
     sprintf(str,"%s %s\n",down?"kd":"ku",keyname[key]);
-    Log("here in key!=_KEY_NONE");
+    //Log("here in key!=_KEY_NONE");
   }
   else{
     sprintf(str,"t %d\n",_uptime());
-    Log("here in key==_KEY_NONE");
+    //Log("here in key==_KEY_NONE");
   }
 
   if(strlen(str)<=len){
