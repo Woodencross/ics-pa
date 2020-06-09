@@ -93,6 +93,7 @@ static int cmd_info(char *args)
     {
       printf("%s		0x%x\n", regsb[i], reg_b(i));
     }
+    printf("CR0=0x%x, CR3=0x%x\n",cpu.CR0,cpu.CR3);
     return 0;
   }
   if (s == 'w')

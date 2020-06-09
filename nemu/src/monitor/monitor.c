@@ -90,6 +90,9 @@ static inline void restart() {
   //CS寄存器初始化
   cpu.cs=8;
 
+  //CR0寄存器初始化
+  cpu.CR0=0x60000011;
+
 #ifdef DIFF_TEST
   init_qemu_reg();
 #endif

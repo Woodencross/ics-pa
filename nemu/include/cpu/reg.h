@@ -54,6 +54,12 @@ typedef struct {
 
   //CS寄存器
   rtlreg_t cs;
+
+  //CR0寄存器
+  uint32_t CR0;
+
+  //CR3寄存器
+  uint32_t CR3;
 } CPU_state;
 
 extern CPU_state cpu;
