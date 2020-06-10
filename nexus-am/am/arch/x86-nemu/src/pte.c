@@ -82,7 +82,7 @@ void _map(_Protect *p, void *va, void *pa) {
   pgtab=(PTE*)PTE_ADDR(*pde);//二级页表首地址
 
   PTE* pte=pgtab+PTX(va);//二级页表表项
-  *pte=(uintptr_t)pa | PTE_P;
+  *pte=(uintptr_t)pa | PTE_P;//添加映射
 }
 
 void _unmap(_Protect *p, void *va) {
