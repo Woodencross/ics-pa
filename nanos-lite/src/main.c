@@ -30,10 +30,10 @@ int main() {
 
   init_fs();
 
-  uintptr_t entry = loader(NULL, "/bin/dummy");
-  ((void(*)(void))entry)();
-  //extern void load_prog(const char* filename);
-  //load_prog("/bin/dummy");
+  //uintptr_t entry = loader(NULL, "/bin/dummy");
+  //((void(*)(void))entry)();
+  extern void load_prog(const char* filename);
+  load_prog("/bin/dummy");
 
   panic("Should not reach here");
 }
