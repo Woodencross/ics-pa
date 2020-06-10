@@ -67,8 +67,8 @@ void _switch(_Protect *p) {
 
 void _map(_Protect *p, void *va, void *pa) {
   if(OFF(va) || OFF(pa)){//检查va,pa对齐
-    //
-    return;
+    
+    //return;
   }
 
   PDE* pgdir=(PDE*)p->ptr;//页目录基地址
