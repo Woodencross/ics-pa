@@ -37,7 +37,7 @@ paddr_t page_translate(vaddr_t addr,bool iswrite){
     printf("vaddr = 0x%x, paddr = 0x%x\n",addr,paddr);
     return paddr;
   }
-  printf("return paddr = vaddr\n");
+  //printf("return paddr = vaddr\n");
   return addr;
 }
 
