@@ -15,7 +15,7 @@ uintptr_t loader(_Protect *as, const char *filename) {
   int fd=fs_open(filename,0,0);
   Log("filename = %s, fd = %d",filename,fd);
   //fs_read(fd,DEFAULT_ENTRY,fs_filesz(fd));
-/*
+
   int size=fs_filesz(fd);
   int ppnum=size/PGSIZE;//总页数
   if(size%PGSIZE!=0){
@@ -29,7 +29,8 @@ uintptr_t loader(_Protect *as, const char *filename) {
     fs_read(fd,pa,PGSIZE);
     va+=PGSIZE;
   }
-*/
+
+/* 
   size_t len=fs_filesz(fd);
   void* va;
   void* pa;
@@ -39,7 +40,7 @@ uintptr_t loader(_Protect *as, const char *filename) {
     _map(as,va,pa);
     fs_read(fd,pa,(end-va)<PGSIZE?(end-va):PGSIZE);
   }
-
+*/
   fs_close(fd);
   return (uintptr_t)DEFAULT_ENTRY;
 }
