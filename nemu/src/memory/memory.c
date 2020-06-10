@@ -6,8 +6,8 @@
 #include "memory/mmu.h"
 
 #define PTE_ADDR(pte)    ((uint32_t)(pte)&~0xfff)
-#define PDX(va)          (((uint32_t)(va)>>22)&0x3fff)
-#define PTX(va)          (((uint32_t)(va)>>12)&0x3fff)
+#define PDX(va)          (((uint32_t)(va)>>22)&0x3ff)
+#define PTX(va)          (((uint32_t)(va)>>12)&0x3ff)
 #define OFF(va)          ((uint32_t)(va)&0xfff)
 
 paddr_t page_translate(vaddr_t addr,bool iswrite){
