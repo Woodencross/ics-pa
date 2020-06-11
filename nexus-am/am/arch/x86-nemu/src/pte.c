@@ -102,7 +102,7 @@ _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *cons
 
   //陷阱帧
   _RegSet tf;
-  tf.eflags=0x02;
+  tf.eflags=0x02 | FL_IF;
   tf.cs=8;
   tf.eip=(uintptr_t)entry;
   void* ptf=(void*)(ustack.end-16-sizeof(_RegSet));

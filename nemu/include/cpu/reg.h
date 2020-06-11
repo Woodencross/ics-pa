@@ -60,6 +60,9 @@ typedef struct {
 
   //CR3寄存器
   uint32_t CR3;
+
+  //INTR硬件中断
+  bool INTR;
 } CPU_state;
 
 extern CPU_state cpu;
